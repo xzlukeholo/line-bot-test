@@ -40,16 +40,46 @@ def callback():
 def handle_message(event):
     msg = event.message.text
 
+    if msg in ['你現在心情如何?', '你現在心情如何', '今天心情好嗎?', '過得怎樣?']:
+        sticker_message = StickerSendMessage(
+        package_id='1',
+        sticker_id='1'
+        )
+        return
+
+    if '心情如何' in msg:
+        sticker_message = StickerSendMessage(
+        package_id='11538',
+        sticker_id='51626521'
+        )
+        return
+
     if msg == '吃飯了嗎':
-        r = '還沒耶owo，有罐罐嗎?'
+        random_num = random.randint(1, 2)
+        if random_num == 1:
+            r = '還沒耶owo，有罐罐嗎?'
+        elif random_num == 2:
+            r = '還沒吃~餓餓 (•͈⌔•͈⑅)'
     elif msg in ['hi', 'HI', 'Hi']:
-        random_num = random.randint(1, 3)
+        random_num = random.randint(1, 4)
         if random_num == 1:
             r = 'hi'
         elif random_num == 2:
             r = '喵囉哈~'
         elif random_num == 3:
-            r = '嗨嗨嗨~'
+            r = 'hello!'
+        elif random_num == 4:
+            r = '喵~owo'
+    elif msg == 'こんにちは':
+        r = 'こんにちはにゃ~'
+    elif msg == 'おはよう':
+        r = 'おはようにゃ~'
+    elif msg == 'ただいま':
+        r = 'おかえり(≧▽≦)'
+    elif msg == '略略略':
+        r = '略略略~٩(●˙▿˙●)۶…⋆ฺ'
+    elif msg == '開心嗎?':
+        r = '敲開心（ΦωΦ）!'
 
     line_bot_api.reply_message(
         event.reply_token,
