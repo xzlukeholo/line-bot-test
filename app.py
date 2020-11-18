@@ -1,3 +1,4 @@
+import random
 from flask import Flask, request, abort
 
 from linebot import (
@@ -7,7 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, StickerSendMessage
 )
 
 app = Flask(__name__)
@@ -37,9 +38,22 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    msg = event.message.text
+
+    if msg == '吃飯了嗎':
+        r = '還沒耶owo，有罐罐嗎?'
+    elif msg in ['hi', 'HI', 'Hi']:
+        random_num = random.randint(1, 3)
+        if random_num == 1:
+            r = 'hi'
+        elif random_num == 2:
+            r = '喵囉哈~'
+        elif random_num == 3:
+            r = '嗨嗨嗨~'
+
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text= r))
 
 
 if __name__ == "__main__":
