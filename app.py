@@ -69,7 +69,7 @@ def handle_message(event):
             package_id='11538',
             sticker_id='51626521'
         )
-        
+
         line_bot_api.reply_message(
         event.reply_token,
         sticker_message)
@@ -104,6 +104,11 @@ def handle_message(event):
         r = '敲開心（ΦωΦ）!'
     elif msg == '開心嗎':
         r = '敲開心（ΦωΦ）!'
+    else:
+            line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
+            return
 
     line_bot_api.reply_message(
         event.reply_token,
