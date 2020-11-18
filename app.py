@@ -40,18 +40,40 @@ def callback():
 def handle_message(event):
     msg = event.message.text
 
-    if msg in ['你現在心情如何?', '你現在心情如何', '今天心情好嗎?', '過得怎樣?']:
+    if '給我貼圖' in msg:
         sticker_message = StickerSendMessage(
-        package_id='1',
-        sticker_id='1'
+            package_id='11537',
+            sticker_id='52002745'
         )
+
+        line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message)
+
+        return
+
+    if msg in ['你現在心情如何？', '你現在心情如何', '今天心情好嗎', '過得怎樣']:
+        sticker_message = StickerSendMessage(
+            package_id='1',
+            sticker_id='1'
+        )
+
+        line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message)
+        
         return
 
     if '心情如何' in msg:
         sticker_message = StickerSendMessage(
-        package_id='11538',
-        sticker_id='51626521'
+            package_id='11538',
+            sticker_id='51626521'
         )
+        
+        line_bot_api.reply_message(
+        event.reply_token,
+        sticker_message)
+        
         return
 
     if msg == '吃飯了嗎':
@@ -78,7 +100,9 @@ def handle_message(event):
         r = 'おかえり(≧▽≦)'
     elif msg == '略略略':
         r = '略略略~٩(●˙▿˙●)۶…⋆ฺ'
-    elif msg == '開心嗎?':
+    elif msg == '開心嗎？':
+        r = '敲開心（ΦωΦ）!'
+    elif msg == '開心嗎':
         r = '敲開心（ΦωΦ）!'
 
     line_bot_api.reply_message(
